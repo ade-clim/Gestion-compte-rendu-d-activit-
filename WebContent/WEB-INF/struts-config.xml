@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC 
+   "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" 
+   "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+<struts-config>
+
+
+	<form-beans type="org.apache.struts.action.ActionFormBean">
+		<form-bean name="loginForm" type="fr.afpa.formation.beanStruts.LoginForm" />
+		<form-bean name="createCra" type="fr.afpa.formation.beanStruts.CraForm" />
+	</form-beans>
+
+	<action-mappings type="org.apache.struts.action.ActionMapping">
+		
+		<action path="/login" parameter="" input="/index.jsp"
+			scope="request" name="loginForm"
+			type="fr.afpa.formation.controllerStruts.LoginAction">
+			<forward name="succesManager" path="/WEB-INF/jsp/manager.jsp" redirect="false" />
+			<forward name="succesCollaborateur" path="/WEB-INF/jsp/collaborateur.jsp" redirect="false" />
+			<forward name="echec" path="/index.jsp" redirect="false" />
+		</action>
+		
+		
+		<action path="/creercra"
+            type="org.apache.struts.actions.ForwardAction"
+            parameter="/WEB-INF/jsp/createcra.jsp"
+    	 />
+    	 
+    	 <action path="/verifcra" parameter="" input="/createcrea.jsp"
+			scope="request" name="createCra"
+			type="fr.afpa.formation.controllerStruts.CraAction">
+			<forward name="newCrea" path="/WEB-INF/jsp/manager.jsp" redirect="false" />
+			<forward name="creaExistant" path="/WEB-INF/jsp/collaborateur.jsp" redirect="false" />
+			<forward name="echec" path="/index.jsp" redirect="false" />
+		</action>
+		
+	</action-mappings>
+	<controller nocache="true" />
+	<message-resources parameter="ApplicationResources" null="false" />
+</struts-config>
